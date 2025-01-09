@@ -22,7 +22,7 @@ pnpm add clodynix
 import { Clodynix } from 'clodynix';
 
 const clodynix = new Clodynix({
-  token: process.env.ClodynixSecret || '',
+  apiKey: process.env.ClodynixSecret || '',
 });
 
 // Get a file
