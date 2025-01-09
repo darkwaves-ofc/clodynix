@@ -1,0 +1,35 @@
+{
+  "name": "clodynix",
+  "version": "0.0.1",
+  "description": "Clodynix is a modern, efficient, and developer-friendly CDN package offering seamless content delivery with an intuitive dashboard and comprehensive documentation. Simplify your content delivery with Clodynix's powerful and scalable platform.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darkwaves-ofc/clodynix.git"
+  },
+  "homepage": "https://clodynix.noerror.studio",
+  "keywords": [
+    "Clodynix",
+    "CDN",
+    "package",
+    "Content",
+    "Delivery",
+    "Network"
+  ],
+  "author": "darkwaves-ofc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/darkwaves-ofc/clodynix/issues"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
+}
