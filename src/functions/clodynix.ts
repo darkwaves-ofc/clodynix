@@ -4,10 +4,20 @@ import { cdnToken, cdnFileType } from "../types";
 class Clodynix {
   private apiKey: string;
   private origin: string;
+  private secret: string;
 
-  constructor({ apiKey, origin }: { apiKey: string; origin: string }) {
+  constructor({
+    apiKey,
+    origin,
+    secret,
+  }: {
+    apiKey: string;
+    origin: string;
+    secret: string;
+  }) {
     this.apiKey = apiKey;
     this.origin = origin;
+    this.secret = secret;
   }
 
   private getAuthToken() {
@@ -18,10 +28,20 @@ class Clodynix {
     return this.origin;
   }
 
-  async checkFileInfo(fileId?: string, token?: string): Promise<cdnFileType | null> {
+  private getSecret() {
+    return this.secret;
+  }
+
+  async checkFileInfo(
+    fileId?: string,
+    token?: string
+  ): Promise<cdnFileType | null> {
     try {
       const res = await axios.get(`${this.getOriginLink()}/v1/file/info`, {
-        headers: { Authorization: this.getAuthToken() },
+        headers: {
+          Authorization: this.getAuthToken(),
+          Secret: this.getSecret(),
+        },
         data: { fileId, token },
       });
       if (res.status !== 200) throw new Error(res.data);
@@ -36,7 +56,12 @@ class Clodynix {
       const res = await axios.post(
         `${this.getOriginLink()}/v1/file/register`,
         { token },
-        { headers: { Authorization: this.getAuthToken() } }
+        {
+          headers: {
+            Authorization: this.getAuthToken(),
+            Secret: this.getSecret(),
+          },
+        }
       );
       if (res.status !== 200) throw new Error(res.data);
       return res.data.data;
@@ -50,7 +75,12 @@ class Clodynix {
       const res = await axios.put(
         `${this.getOriginLink()}/v1/file/upload/link`,
         { link },
-        { headers: { Authorization: this.getAuthToken() } }
+        {
+          headers: {
+            Authorization: this.getAuthToken(),
+            Secret: this.getSecret(),
+          },
+        }
       );
       if (res.status !== 200) throw new Error(res.data);
       return res.data.data;
@@ -67,7 +97,12 @@ class Clodynix {
       const res = await axios.post(
         `${this.getOriginLink()}/v1/file/upload/token/create`,
         { totalChunks, fileData },
-        { headers: { Authorization: this.getAuthToken() } }
+        {
+          headers: {
+            Authorization: this.getAuthToken(),
+            Secret: this.getSecret(),
+          },
+        }
       );
       if (res.status !== 200) throw new Error(res.data);
       return res.data.data;
@@ -79,7 +114,10 @@ class Clodynix {
   async deleteFile(fileId: string): Promise<string> {
     try {
       const res = await axios.delete(`${this.getOriginLink()}/v1/file/delete`, {
-        headers: { Authorization: this.getAuthToken() },
+        headers: {
+          Authorization: this.getAuthToken(),
+          Secret: this.getSecret(),
+        },
         data: { fileId },
       });
       if (res.status !== 200) throw new Error(res.data);
@@ -94,7 +132,12 @@ class Clodynix {
       const res = await axios.post(
         `${this.getOriginLink()}/v1/link/single/create`,
         { fileId },
-        { headers: { Authorization: this.getAuthToken() } }
+        {
+          headers: {
+            Authorization: this.getAuthToken(),
+            Secret: this.getSecret(),
+          },
+        }
       );
       if (res.status !== 200) throw new Error(res.data);
       return res.data.data;
@@ -103,12 +146,19 @@ class Clodynix {
     }
   }
 
-  async generateLinksBatch(fileIds: string[]): Promise<{ id: string; link: string }[]> {
+  async generateLinksBatch(
+    fileIds: string[]
+  ): Promise<{ id: string; link: string }[]> {
     try {
       const res = await axios.post(
         `${this.getOriginLink()}/v1/link/batch/create`,
         { fileIds },
-        { headers: { Authorization: this.getAuthToken() } }
+        {
+          headers: {
+            Authorization: this.getAuthToken(),
+            Secret: this.getSecret(),
+          },
+        }
       );
       if (res.status !== 200) throw new Error(res.data);
       return res.data.data;
@@ -122,7 +172,7 @@ class Clodynix {
       const file = formdata.get("file") as File;
       const fileBuffer = await file.arrayBuffer();
       const blob = new Blob([fileBuffer]);
-      
+
       const form = new FormData();
       const fileData = {
         name: file.name.split(".").shift() || "",
@@ -136,7 +186,12 @@ class Clodynix {
       const res = await axios.put(
         `${this.getOriginLink()}/v1/file/upload/direct`,
         form,
-        { headers: { Authorization: this.getAuthToken() } }
+        {
+          headers: {
+            Authorization: this.getAuthToken(),
+            Secret: this.getSecret(),
+          },
+        }
       );
 
       if (res.status !== 200) throw new Error(res.data);
