@@ -1,12 +1,13 @@
 {
   "name": "clodynix",
-  "version": "0.0.2",
+  "version": "0.1.2",
   "description": "Clodynix is a modern, efficient, and developer-friendly CDN package offering seamless content delivery with an intuitive dashboard and comprehensive documentation. Simplify your content delivery with Clodynix's powerful and scalable platform.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "production": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
