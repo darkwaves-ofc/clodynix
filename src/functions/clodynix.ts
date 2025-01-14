@@ -37,7 +37,7 @@ class Clodynix {
     token?: string
   ): Promise<cdnFileType | null> {
     try {
-      const res = await axios.get(`${this.getOriginLink()}/v1/file/info`, {
+      const res = await axios.get(`${this.getOriginLink()}/v2/file/info`, {
         headers: {
           Authorization: this.getAuthToken(),
           Secret: this.getSecret(),
@@ -54,7 +54,7 @@ class Clodynix {
   async registerFile(token: string): Promise<cdnFileType | null> {
     try {
       const res = await axios.post(
-        `${this.getOriginLink()}/v1/file/register`,
+        `${this.getOriginLink()}/v2/file/register`,
         { token },
         {
           headers: {
@@ -73,7 +73,7 @@ class Clodynix {
   async uploadByLink(link: string): Promise<cdnFileType | null> {
     try {
       const res = await axios.put(
-        `${this.getOriginLink()}/v1/file/upload/link`,
+        `${this.getOriginLink()}/v2/file/upload/link`,
         { link },
         {
           headers: {
@@ -95,7 +95,7 @@ class Clodynix {
   ): Promise<cdnToken> {
     try {
       const res = await axios.post(
-        `${this.getOriginLink()}/v1/file/upload/token/create`,
+        `${this.getOriginLink()}/v2/file/upload/token/create`,
         { totalChunks, fileData },
         {
           headers: {
@@ -113,7 +113,7 @@ class Clodynix {
 
   async deleteFile(fileId: string): Promise<string> {
     try {
-      const res = await axios.delete(`${this.getOriginLink()}/v1/file/delete`, {
+      const res = await axios.delete(`${this.getOriginLink()}/v2/file/delete`, {
         headers: {
           Authorization: this.getAuthToken(),
           Secret: this.getSecret(),
@@ -130,7 +130,7 @@ class Clodynix {
   async generateLink(fileId: string): Promise<string> {
     try {
       const res = await axios.post(
-        `${this.getOriginLink()}/v1/link/single/create`,
+        `${this.getOriginLink()}/v2/link/single/create`,
         { fileId },
         {
           headers: {
@@ -151,7 +151,7 @@ class Clodynix {
   ): Promise<{ id: string; link: string }[]> {
     try {
       const res = await axios.post(
-        `${this.getOriginLink()}/v1/link/batch/create`,
+        `${this.getOriginLink()}/v2/link/batch/create`,
         { fileIds },
         {
           headers: {
@@ -184,7 +184,7 @@ class Clodynix {
       form.append("file", blob);
 
       const res = await axios.put(
-        `${this.getOriginLink()}/v1/file/upload/direct`,
+        `${this.getOriginLink()}/v2/file/upload/direct`,
         form,
         {
           headers: {
