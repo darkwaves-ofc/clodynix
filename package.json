@@ -1,6 +1,6 @@
 {
   "name": "clodynix",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Clodynix is a modern, efficient, and developer-friendly CDN package offering seamless content delivery with an intuitive dashboard and comprehensive documentation. Simplify your content delivery with Clodynix's powerful and scalable platform.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

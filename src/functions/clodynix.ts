@@ -37,7 +37,7 @@ class Clodynix {
     token?: string
   ): Promise<cdnFileType | null> {
     try {
-      const res = await axios.get(`${this.getOriginLink()}/v2/file/info`, {
+      const res = await axios.get(`${this.getOriginLink()}/v2/file/info/client`, {
         headers: {
           Authorization: this.getAuthToken(),
           Secret: this.getSecret(),
